@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Osman Islyamov — Quality Assurance Lead</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f0f12;
+      --surface: #16161a;
+      --surface-alt: #1c1c21;
+      --text: #e4e4e7;
+      --text-muted: #a1a1aa;
+      --accent: #a78bfa;
+      --accent-dim: #8b5cf6;
+      --border: #27272a;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --radius-chip: 6px;
+      --shadow: 0 4px 24px rgba(0,0,0,0.4);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 1rem;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+    body {
+      font-family: 'DM Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+      padding: 0 5%;
+    }
+    .container {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    section {
+      padding: 2.75rem 0;
+      border-bottom: 1px solid var(--border);
+      scroll-margin-top: 1rem;
+    }
+    section:first-of-type { padding-top: 0.75rem; }
+    section:last-of-type { border-bottom: none; }
+    h1 { font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 700; letter-spacing: -0.02em; }
+    h2 {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 1.5rem;
+    }
+    p { color: var(--text-muted); margin-bottom: 0.75rem; }
+    a { color: var(--accent); text-decoration: none; transition: color 0.2s ease; }
+    a:hover { text-decoration: underline; }
+
+    /* Hero — full-width header with image + gradient blend */
+    .hero {
+      position: relative;
+      width: 100%;
+      min-height: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('image00022.png');
+      background-size: 65%;
+      background-position: center 42%;
+      background-repeat: no-repeat;
+    }
+    .hero-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(15, 15, 18, 0.4) 0%,
+        rgba(15, 15, 18, 0.15) 25%,
+        rgba(15, 15, 18, 0.5) 50%,
+        rgba(15, 15, 18, 0.9) 80%,
+        var(--bg) 100%
+      );
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 100%;
+      padding: 45vh 2rem 1rem;
+      margin: 0 auto;
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: clamp(2.25rem, 6vw, 3.25rem);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    }
+    .hero-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+    }
+    .hero-tagline {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 480px;
+      margin: 0 auto;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+    }
+
+    /* Chips — single neutral style for all */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-chip);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    /* Progress bars */
+    .progress-item { margin-bottom: 1rem; }
+    .progress-item:last-child { margin-bottom: 0; }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.875rem;
+      margin-bottom: 0.35rem;
+    }
+    .progress-bar {
+      height: 8px;
+      border-radius: 999px;
+      background: var(--surface-alt);
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent-dim), var(--accent));
+      transition: width 0.6s ease;
+    }
+
+    /* About */
+    .about .bio { margin-bottom: 1.25rem; }
+    .about .chips { margin-top: 0.5rem; }
+
+    /* Skills grid */
+    .skills-grid {
+      display: grid;
+      gap: 1.5rem;
+    }
+    @media (min-width: 640px) {
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .skill-category h3 {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    /* Experience timeline */
+    .timeline { position: relative; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+      border-radius: 2px;
+    }
+    @media (min-width: 640px) { .timeline::before { left: 12px; } }
+    .timeline-item {
+      position: relative;
+      padding-left: 2rem;
+      padding-bottom: 2rem;
+    }
+    @media (min-width: 640px) { .timeline-item { padding-left: 2.5rem; } }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-dot {
+      position: absolute;
+      left: -5px;
+      top: 4px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+    }
+    @media (min-width: 640px) { .timeline-dot { left: 6px; } }
+    .timeline-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: var(--shadow);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .timeline-role { font-weight: 600; font-size: 1rem; margin-bottom: 0.2rem; }
+    .timeline-meta {
+      font-size: 0.8125rem;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .timeline-meta .company { color: var(--text-muted); }
+    .timeline-list {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      padding-left: 1.25rem;
+    }
+    .timeline-list li { margin-bottom: 0.35rem; }
+
+    /* Education / Courses / Achievements */
+    .card-list { display: flex; flex-direction: column; gap: 1rem; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      transition: border-color 0.2s ease;
+    }
+    .card-title { font-weight: 600; margin-bottom: 0.25rem; }
+    .card-meta { font-size: 0.8125rem; color: var(--text-muted); }
+    .two-col { display: grid; gap: 1rem; }
+    @media (min-width: 640px) { .two-col { grid-template-columns: 1fr 1fr; } }
+
+    /* Contact — clickable links styled as buttons (distinct from non-clickable chips) */
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 0.75rem;
+    }
+    .contact-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.55rem 1.15rem;
+      background: rgba(167, 139, 250, 0.15);
+      border: 1px solid var(--accent-dim);
+      border-radius: var(--radius-sm);
+      color: var(--accent);
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    }
+    .contact-links a:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--bg);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    /* Print */
+    @media print {
+      body { background: #fff; color: #111; }
+      section { border-color: #ddd; padding: 1rem 0; }
+      .hero-avatar { border-color: #8b5cf6; }
+      .chip, .timeline-card, .card { break-inside: avoid; }
+      a[href]::after { content: ''; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-gradient" aria-hidden="true"></div>
+    <div class="hero-content">
+      <h1>Osman Islyamov</h1>
+      <p class="hero-title">Quality Assurance Lead</p>
+      <p class="hero-tagline">Software engineer specialized in Quality Assurance — manual & automation testing, Playwright, mobile (Android & iOS), and AI-assisted tooling.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="about">
+      <div class="container">
+        <h2>About</h2>
+        <div class="bio">
+          <p>Senior Quality Assurance Engineer specializing in front-end manual and automation testing. Experienced with all stages of the development cycle for dynamic web projects and desktop applications. Creating and executing test strategies. Strong background in project management and customer relations. Involved in design and creation of more than 7 products in different international teams. Passionate about smart devices.</p>
+          <p>In the last 2 years I have been working on a mobile application for vehicles — testing manually on both Android and iOS, running automation tests, writing test cases, and working closely with FE and BE teams to improve UX, using Swagger, Figma, Cursor, and GitLab for an American company with microservice architecture and Flutter frontend. I also work with Apollo GraphQL: running queries and testing the BE router and subgraphs.</p>
+        </div>
+        <div class="chips">
+          <span class="chip">Project management</span>
+          <span class="chip">Strong decision maker</span>
+          <span class="chip">Complex problem solver</span>
+          <span class="chip">Leadership</span>
+          <span class="chip">Detail oriented</span>
+          <span class="chip">Self-driven</span>
+          <span class="chip">Creative design</span>
+          <span class="chip">Innovative</span>
+          <span class="chip">UX-focused</span>
+          <span class="chip">Cooperative</span>
+          <span class="chip">Well organized</span>
+          <span class="chip">Initiative</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Skills & expertise</h2>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3>Testing</h3>
+            <div class="chips">
+              <span class="chip">Manual testing</span>
+              <span class="chip">Automation testing</span>
+              <span class="chip">Playwright</span>
+              <span class="chip">SilkTest</span>
+              <span class="chip">E2E & regression</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Tools & platforms</h3>
+            <div class="chips">
+              <span class="chip">Postman</span>
+              <span class="chip">Figma</span>
+              <span class="chip">MCP servers</span>
+              <span class="chip">AI / Cursor</span>
+              <span class="chip">Swagger</span>
+              <span class="chip">Apollo GraphQL</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Mobile & stack</h3>
+            <div class="chips">
+              <span class="chip">Android</span>
+              <span class="chip">iOS</span>
+              <span class="chip">Flutter</span>
+              <span class="chip">TypeScript</span>
+              <span class="chip">Git / GitLab</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Level (self‑assessment)</h3>
+            <div class="progress-item">
+              <div class="progress-label"><span>Automation (Playwright / TypeScript)</span><span>Expert</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width: 92%"></div></div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-label"><span>Manual & test strategy</span><span>Expert</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width: 95%"></div></div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-label"><span>Mobile QA (Android / iOS)</span><span>Advanced</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width: 85%"></div></div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-label"><span>API / GraphQL testing</span><span>Advanced</span></div>
+              <div class="progress-bar"><div class="progress-fill" style="width: 82%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Experience</h2>
+        <div class="timeline">
+          <article class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div class="timeline-card">
+              <div class="timeline-role">Senior Quality Assurance</div>
+              <div class="timeline-meta">Aug 2021 — ongoing · <span class="company">DIGITALL, Sofia</span></div>
+              <ul class="timeline-list">
+                <li>Participate in all aspects of the content QA product lifecycle</li>
+                <li>Create demos for all requirements; test Backend and Frontend tickets</li>
+                <li>Platform team; creating automation tests with TypeScript/Playwright</li>
+              </ul>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div class="timeline-card">
+              <div class="timeline-role">Quality Assurance</div>
+              <div class="timeline-meta">Apr 2020 — Aug 2021 · <span class="company">Bulpros Consulting, Sofia</span></div>
+              <ul class="timeline-list">
+                <li>Frontend and Backend testing of web-based applications; international team</li>
+                <li>Full QA lifecycle: requirements, test cases, feature/regression/integration/E2E</li>
+                <li>Review requirements and tech design; estimate, prioritize, coordinate testing</li>
+                <li>Bug reporting, verification, root cause analysis; automation design; documentation</li>
+                <li>Agile; scripting (Python, bash, PowerShell); Cloud (AWS, Azure)</li>
+              </ul>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div class="timeline-card">
+              <div class="timeline-role">Quality Assurance Engineer</div>
+              <div class="timeline-meta">Sept 2016 — March 2020 · <span class="company">Micro Focus APM, Sofia</span></div>
+              <ul class="timeline-list">
+                <li>Automation and manual testing of web-based systems for Sprint Planning and synchronization</li>
+                <li>Quality Services: Sprint Planning & Tracking suite; SilkTest automation, regression reports</li>
+                <li>International team; manual and automation (installation, regression, acceptance, E2E, GUI)</li>
+              </ul>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div class="timeline-card">
+              <div class="timeline-role">Quality Assurance Intern</div>
+              <div class="timeline-meta">July 2015 — Aug 2016 · <span class="company">Micro Focus APM, Sofia</span></div>
+              <ul class="timeline-list">
+                <li>Manual testing of desktop application (Enterprise analyzer — code impact analysis)</li>
+                <li>Test design, execution, defect verification; international team (20+ people, 5 countries)</li>
+              </ul>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div class="timeline-card">
+              <div class="timeline-role">Junior Mobile / Front-end developer</div>
+              <div class="timeline-meta">July 2013 — Feb 2014 · <span class="company">Bitmix Bulgaria EOOD, Sofia</span></div>
+              <ul class="timeline-list">
+                <li>Mobile-as-a-Service platform; frontend team; standups and planning</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Education</h2>
+        <div class="card-list">
+          <div class="card">
+            <div class="card-title">Master Degree — E-learning</div>
+            <div class="card-meta">2019 — ongoing · Sofia University (FMI), Sofia</div>
+          </div>
+          <div class="card">
+            <div class="card-title">Bachelor Degree — Software Engineering</div>
+            <div class="card-meta">2011 — 2015 · Sofia University (FMI), Sofia</div>
+          </div>
+          <div class="card">
+            <div class="card-title">High School — Mathematics and Informatics</div>
+            <div class="card-meta">2007 — 2011 · High School of Mathematics, Blagoevgrad</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Courses & certifications</h2>
+        <div class="chips">
+          <span class="chip">ISTQB Certified Tester Foundation Level</span>
+          <span class="chip">OOP basics — Telerik Academy</span>
+          <span class="chip">Java for beginners — On Target training</span>
+          <span class="chip">OOP Java/Android — IT talents</span>
+          <span class="chip">FutureIsCode — Presenter</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Achievements</h2>
+        <div class="chips">
+          <span class="chip">Representing Bulgaria — IRI global Leadership training, Bodrum, Turkey</span>
+          <span class="chip">Former candidate for MP — Bulgarian parliament</span>
+          <span class="chip">Former member — national political party board (youth organization)</span>
+          <span class="chip">Local assistant to a MEP</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Technologies & tools</h2>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3>Languages & scripting</h3>
+            <div class="chips">
+              <span class="chip">TypeScript</span>
+              <span class="chip">Java</span>
+              <span class="chip">Bash</span>
+              <span class="chip">PowerShell</span>
+              <span class="chip">Python</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Dev & CI/CD</h3>
+            <div class="chips">
+              <span class="chip">Git</span>
+              <span class="chip">BitBucket</span>
+              <span class="chip">Jenkins</span>
+              <span class="chip">Docker</span>
+              <span class="chip">AWS</span>
+              <span class="chip">Azure</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Project & docs</h3>
+            <div class="chips">
+              <span class="chip">Jira</span>
+              <span class="chip">Confluence</span>
+              <span class="chip">Rally</span>
+              <span class="chip">SCRUM</span>
+              <span class="chip">KANBAN</span>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Testing & DB</h3>
+            <div class="chips">
+              <span class="chip">Playwright</span>
+              <span class="chip">SilkTest</span>
+              <span class="chip">Postman</span>
+              <span class="chip">MySQL Workbench</span>
+              <span class="chip">WinSCP</span>
+              <span class="chip">PuTTy</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2>Passions</h2>
+        <div class="chips">
+          <span class="chip">Smart devices</span>
+          <span class="chip">Innovations</span>
+          <span class="chip">IoT</span>
+          <span class="chip">Mobile devices</span>
+          <span class="chip">Gaming</span>
+          <span class="chip">Fast typing</span>
+          <span class="chip">UX/UI design</span>
+          <span class="chip">Photography</span>
+          <span class="chip">Digital marketing</span>
+          <span class="chip">Content creating</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact">
+      <div class="container">
+        <h2>Contact</h2>
+        <p>Open to new opportunities and collaboration. Reach out via your preferred channel.</p>
+        <div class="contact-links">
+          <a href="mailto:islyamov@yahoo.com">Email</a>
+          <a href="https://www.linkedin.com/in/osman-islyamov-7a037093/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/osmanislyamov" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.facebook.com/Osmanit0/" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://instagram.com/osmanislyamov" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
