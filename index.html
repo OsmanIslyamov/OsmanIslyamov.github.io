@@ -138,15 +138,142 @@
       font-size: 1rem;
       font-weight: 600;
       color: var(--accent);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.00001rem;
       text-shadow: 0 1px 2px rgba(0,0,0,0.4);
     }
-    .hero-tagline {
-      font-size: 0.95rem;
+    .hero-subtitle {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1.25rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.875rem;
       color: var(--text-muted);
-      max-width: 480px;
-      margin: 0 auto;
       text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+    }
+    .hero-subtitle span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .hero-subtitle a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .hero-subtitle a:hover {
+      color: var(--text);
+    }
+    .hero-subtitle svg {
+      width: 0.9rem;
+      height: 0.9rem;
+      opacity: 0.9;
+    }
+    .hero-tagline {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      max-width: 100%;
+      margin: 0 auto;
+      margin-top: 0;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+      white-space: nowrap;
+    }
+    @media (max-width: 900px) {
+      .hero-tagline { white-space: normal; }
+    }
+
+    /* Tab bar (CV / Me) */
+    .tab-bar {
+      display: flex;
+      width: 100%;
+      padding: 0 2rem;
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .tab-btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 0.85rem 1.5rem;
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      background: none;
+      color: var(--text-muted);
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: color 0.25s ease, border-color 0.25s ease, background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+      border-radius: var(--radius-sm);
+      position: relative;
+    }
+    .tab-btn:first-child {
+      justify-content: flex-end;
+      padding-right: 1.25rem;
+    }
+    .tab-btn:last-child {
+      justify-content: flex-start;
+      padding-left: 1.25rem;
+    }
+    .tab-btn:hover {
+      color: var(--accent);
+      background: rgba(167, 139, 250, 0.08);
+      transform: scale(1.02);
+    }
+    .tab-btn:hover::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+    .tab-btn::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      width: 80%;
+      height: 2px;
+      background: var(--accent);
+      transform: translateX(-50%) scaleX(0);
+      opacity: 0;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      border-radius: 2px;
+    }
+    .tab-btn.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+    .tab-btn.active::after {
+      display: none;
+    }
+    .tab-panel {
+      display: none;
+    }
+    .tab-panel.active {
+      display: block;
+    }
+    .me-social {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    .me-social a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      text-decoration: none;
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .me-social a:hover {
+      border-color: var(--text-muted);
+      color: var(--text);
     }
 
     /* Chips — single neutral style for all */
@@ -367,6 +494,7 @@
 
     /* Print */
     @media print {
+      .tab-bar { display: none !important; }
       .theme-toggle,
       .pdf-export-btn { display: none !important; }
       body { background: #fff; color: #111; }
@@ -391,38 +519,28 @@
     <div class="hero-gradient" aria-hidden="true"></div>
     <div class="hero-content">
       <h1>Osman Islyamov</h1>
+      <p class="hero-subtitle">
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+          Sofia, Bulgaria
+        </span>
+        <span>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+          <a href="mailto:islyamov@yahoo.com">islyamov@yahoo.com</a>
+        </span>
+      </p>
       <p class="hero-title">Quality Assurance Lead</p>
       <p class="hero-tagline">Software engineer specialized in Quality Assurance — manual & automation testing, Playwright, mobile (Android & iOS), and AI-assisted tooling.</p>
     </div>
   </header>
 
   <main>
-    <section class="about">
-      <div class="container">
-        <h2>About</h2>
-        <div class="bio">
-          <p>Senior Quality Assurance Engineer with extensive experience in front-end manual and automation testing across web, desktop, and mobile applications. Proven expertise in building and executing comprehensive test strategies throughout the full software development lifecycle for complex, high-traffic, and dynamic products.</p>
-          <p>Over the past two years, I have been a key QA contributor on a vehicle-focused mobile application, testing across both Android and iOS platforms. My responsibilities include end-to-end manual testing, automation execution, detailed test case design, regression strategy ownership, and close collaboration with Front-End and Back-End engineering teams to continuously improve product quality and user experience.</p>
-          <p>I work within a microservices architecture environment featuring a Flutter frontend and Apollo GraphQL-based backend (router + subgraphs). My daily toolkit includes Swagger for API validation, Apollo GraphQL for query execution and schema verification, Figma for design validation, GitLab for CI/CD workflows, and modern AI-assisted development tools.</p>
-          <p>Throughout my career, I have contributed to the design, testing, and delivery of more than seven products across international teams, combining strong technical QA expertise with solid project coordination and stakeholder communication skills.</p>
-        </div>
-        <div class="chips">
-          <span class="chip">Project management</span>
-          <span class="chip">Strong decision maker</span>
-          <span class="chip">Complex problem solver</span>
-          <span class="chip">Leadership</span>
-          <span class="chip">Detail oriented</span>
-          <span class="chip">Self-driven</span>
-          <span class="chip">Creative design</span>
-          <span class="chip">Innovative</span>
-          <span class="chip">UX-focused</span>
-          <span class="chip">Cooperative</span>
-          <span class="chip">Well organized</span>
-          <span class="chip">Initiative</span>
-        </div>
-      </div>
-    </section>
+    <div class="tab-bar">
+      <button type="button" class="tab-btn" data-tab="me" id="btn-me">Me</button>
+      <button type="button" class="tab-btn active" data-tab="cv" id="btn-cv">CV</button>
+    </div>
 
+    <div id="tab-cv" class="tab-panel active">
     <section>
       <div class="container">
         <h2>Skills & expertise</h2>
@@ -669,11 +787,43 @@
           <a href="mailto:islyamov@yahoo.com">Email</a>
           <a href="https://www.linkedin.com/in/osman-islyamov-7a037093/" target="_blank" rel="noopener">LinkedIn</a>
           <a href="https://github.com/osmanislyamov" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://www.facebook.com/Osmanit0/" target="_blank" rel="noopener" class="contact-link-muted">Facebook</a>
-          <a href="https://instagram.com/osmanislyamov" target="_blank" rel="noopener" class="contact-link-muted">Instagram</a>
         </div>
       </div>
     </section>
+    </div>
+
+    <div id="tab-me" class="tab-panel">
+      <section class="about">
+        <div class="container">
+          <h2>About myself</h2>
+          <div class="bio">
+            <p>I am a software engineer specialized in Quality Assurance, with extensive experience in manual and automation testing across web, desktop, and mobile applications. I build and run test strategies across the full software development lifecycle for complex, high-traffic, and dynamic products.</p>
+            <p>For the past two years I have been a key QA contributor on a vehicle-focused mobile application, testing on both Android and iOS. I lead end-to-end manual testing, automation execution, test case design, and regression strategy, and I work closely with Front-End and Back-End teams to improve product quality and user experience.</p>
+            <p>I work in a microservices environment with a Flutter frontend and an Apollo GraphQL backend (router and subgraphs). My day-to-day tools include Swagger for API validation, Apollo GraphQL for queries and schema checks, Figma for design validation, GitLab for CI/CD, and modern AI-assisted development tools.</p>
+            <p>Throughout my career I have contributed to the design, testing, and delivery of more than seven products in international teams, combining technical QA expertise with project coordination and stakeholder communication.</p>
+          </div>
+          <div class="chips">
+            <span class="chip">Project management</span>
+            <span class="chip">Strong decision maker</span>
+            <span class="chip">Complex problem solver</span>
+            <span class="chip">Leadership</span>
+            <span class="chip">Detail oriented</span>
+            <span class="chip">Self-driven</span>
+            <span class="chip">Creative design</span>
+            <span class="chip">Innovative</span>
+            <span class="chip">UX-focused</span>
+            <span class="chip">Cooperative</span>
+            <span class="chip">Well organized</span>
+            <span class="chip">Initiative</span>
+          </div>
+          <h2 style="margin-top: 2rem;">Find me</h2>
+          <div class="me-social">
+            <a href="https://www.facebook.com/Osmanit0/" target="_blank" rel="noopener">Facebook</a>
+            <a href="https://instagram.com/osmanislyamov" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
+      </section>
+    </div>
   </main>
   <script>
     (function () {
@@ -696,6 +846,31 @@
           localStorage.setItem('cv-theme', 'light');
         }
       });
+
+      function showTab(id) {
+        var panels = document.querySelectorAll('.tab-panel');
+        var buttons = document.querySelectorAll('.tab-btn');
+        panels.forEach(function (p) {
+          p.classList.toggle('active', p.id === 'tab-' + id);
+        });
+        buttons.forEach(function (b) {
+          b.classList.toggle('active', b.getAttribute('data-tab') === id);
+        });
+        window.location.hash = id;
+      }
+
+      document.getElementById('btn-cv').addEventListener('click', function () {
+        showTab('cv');
+      });
+      document.getElementById('btn-me').addEventListener('click', function () {
+        showTab('me');
+      });
+
+      if (window.location.hash === '#me') {
+        showTab('me');
+      } else {
+        showTab('cv');
+      }
     })();
   </script>
 </body>
